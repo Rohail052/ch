@@ -5,48 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>More Resources</title>
     <style>
-        /* Styling the body */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
             margin: 0;
-            padding: 20px;
-            text-align: center;
         }
 
-        /* Styling the links */
-        a {
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .beautiful-btn {
             display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 15px 25px;
-            margin: 10px;
+            padding: 15px 40px;
             text-decoration: none;
-            border-radius: 5px;
+            color: white;
             font-size: 18px;
-            transition: background-color 0.3s ease;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
         }
 
-        /* Hover effect for the links */
-        a:hover {
-            background-color: #2980b9;
+        .beautiful-btn:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
-        /* Additional styling for links to make them stand out */
-        a:active {
-            background-color: #1e5f8e;
+        /* Button Styles */
+        .btn-1 {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
         }
 
+        .btn-1:hover {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
+        }
+
+        .btn-2 {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        }
+
+        .btn-2:hover {
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+        }
+
+        .btn-3 {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+        }
+
+        .btn-3:hover {
+            background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        }
+
+        .btn-4 {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        .btn-4:hover {
+            background: linear-gradient(135deg, #38ef7d, #11998e);
+        }
     </style>
 </head>
 <body>
 
     <h1>Login and More</h1>
 
-    <a target="_blank" href="Meeting Scheduler 2.html">Schedule Meeting</a>
-    <a target="_blank" href="login.html">login/sign up</a>
-    <a target="_blank" href="https://lerned.org/index.html">learning Web</a>
-    <a target="_blank" href="404.html">Student Resources</a>
+    <div class="button-container">
+        <a target="_blank" href="Meeting Scheduler 2.html" class="beautiful-btn btn-1">Schedule Meeting</a>
+        <a target="_blank" href="login.html" class="beautiful-btn btn-2">login/sign up</a>
+        <a target="_blank" href="https://lerned.org/index.html" class="beautiful-btn btn-3">learning Web</a>
+        <a target="_blank" href="404.html" class="beautiful-btn btn-4">Student Resources</a>
+    </div>
 
 </body>
 </html>
