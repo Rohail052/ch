@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>More Resources</title>
+    <title>Beautiful Buttons</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -19,24 +19,30 @@
         h1 {
             color: #333;
             margin-bottom: 30px;
+            font-size: 5vw;
+            text-align: center;
         }
 
         .button-container {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
 
         .beautiful-btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 1.2em 2.5em;
             text-decoration: none;
             color: white;
-            font-size: 18px;
+            font-size: 1.2em;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
+            text-align: center;
+            min-width: 150px;
         }
 
         .beautiful-btn:hover {
@@ -75,6 +81,38 @@
         .btn-4:hover {
             background: linear-gradient(135deg, #38ef7d, #11998e);
         }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .beautiful-btn {
+                font-size: 1em;
+                padding: 1em 2em;
+            }
+
+            h1 {
+                font-size: 6vw;
+            }
+
+            .button-container {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .beautiful-btn {
+                font-size: 0.9em;
+                padding: 0.8em 1.8em;
+            }
+
+            h1 {
+                font-size: 7vw;
+            }
+
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -82,10 +120,10 @@
     <h1>Login and More</h1>
 
     <div class="button-container">
-        <a target="_blank" href="Meeting Scheduler 2.html" class="beautiful-btn btn-1">Schedule Meeting</a>
-        <a target="_blank" href="login.html" class="beautiful-btn btn-2">login/sign up</a>
-        <a target="_blank" href="https://lerned.org/index.html" class="beautiful-btn btn-3">learning Web</a>
-        <a target="_blank" href="404.html" class="beautiful-btn btn-4">Student Resources</a>
+        <a target="_blank" href="link.html" class="beautiful-btn btn-1">Click Me</a>
+        <a target="_blank" href="link.html" class="beautiful-btn btn-2">Explore</a>
+        <a target="_blank" href="link.html" class="beautiful-btn btn-3">Learn More</a>
+        <a target="_blank" href="link.html" class="beautiful-btn btn-4">Sign Up</a>
     </div>
 
 </body>
