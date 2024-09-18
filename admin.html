@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Admin Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f8f8f8;
+        }
+
+        @media (max-width: 768px) {
+            table, table th, table td {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>School Admin Dashboard</h1>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Grade</th>
+                        <th>Classes</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <!-- Student rows will be populated here via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // List of email addresses provided
+        const emails = [
+            "28438635638@stu.rohail.com",
+            "59227717242@stu.rohail.com",
+            "46505998863@stu.rohail.com",
+            "64405296569@stu.rohail.com",
+            "86378727090@stu.rohail.com",
+            "26585942224@stu.rohail.com",
+            "86836494796@stu.rohail.com",
+            "62580145876@stu.rohail.com",
+            "37300497891@stu.rohail.com",
+            "10969619005@stu.rohail.com",
+            "79263522852@stu.rohail.com",
+            "30890854615@stu.rohail.com",
+            "34417550585@stu.rohail.com",
+            "47861151804@stu.rohail.com",
+            "69591755406@stu.rohail.com",
+            "59993543066@stu.rohail.com",
+            "97138175240@stu.rohail.com",
+            "65132383045@stu.rohail.com",
+            "64151792553@stu.rohail.com",
+            "50451476918@stu.rohail.com",
+            "15903943027@stu.rohail.com",
+            "18383631646@stu.rohail.com",
+            "42392129622@stu.rohail.com",
+            "50877747699@stu.rohail.com",
+            "3570776076@stu.rohail.com",
+            "33923616914@stu.rohail.com",
+            "69442325230@stu.rohail.com",
+            "65952431271@stu.rohail.com",
+            "67899980267@stu.rohail.com",
+            "5932269455@stu.rohail.com",
+            "56643714858@stu.rohail.com",
+            "40571573469@stu.rohail.com",
+            "49584287793@stu.rohail.com",
+            "61298213546@stu.rohail.com",
+            "73426426168@stu.rohail.com",
+            "93977367846@stu.rohail.com",
+            "49138237525@stu.rohail.com",
+            "88386381209@stu.rohail.com",
+            "58257978879@stu.rohail.com",
+            "7676025026@stu.rohail.com",
+            "22405182878@stu.rohail.com",
+            "61922403670@stu.rohail.com",
+            "31511657268@stu.rohail.com",
+            "45841455591@stu.rohail.com",
+            "49351860854@stu.rohail.com",
+            "48028831623@stu.rohail.com",
+            "94239615551@stu.rohail.com",
+            "48181634162@stu.rohail.com",
+            "83585252114@stu.rohail.com",
+            "5528740466@stu.rohail.com",
+            "30712783314@stu.rohail.com",
+            "37931866004@stu.rohail.com",
+            "9471439908@stu.rohail.com",
+            "90514777057@stu.rohail.com",
+            "17960379364@stu.rohail.com",
+            "84805640907@stu.rohail.com",
+            "26588142699@stu.rohail.com",
+            "50915138560@stu.rohail.com",
+            "15683686641@stu.rohail.com",
+            "90863596040@stu.rohail.com",
+            "52190186691@stu.rohail.com",
+            "91250683256@stu.rohail.com",
+            "40289329569@stu.rohail.com",
+            "2715008595@stu.rohail.com",
+            "75203877315@stu.rohail.com",
+            "81075664650@stu.rohail.com",
+            "31064104760@stu.rohail.com",
+            "55732588155@stu.rohail.com",
+            "4823896295@stu.rohail.com",
+            "61474656258@stu.rohail.com",
+            "64363116742@stu.rohail.com",
+            "65852117809@stu.rohail.com",
+            "53260793753@stu.rohail.com",
+            "60952992384@stu.rohail.com",
+            "75490930480@stu.rohail.com",
+            "93997464473@stu.rohail.com",
+            "27980754648@stu.rohail.com",
+            "1844433306@stu.rohail.com",
+            "72797755994@stu.rohail.com",
+            "54393059155@stu.rohail.com",
+            "44825382217@stu.rohail.com",
+            "60680451099@stu.rohail.com",
+            "55988347188@stu.rohail.com",
+            "82619569434@stu.rohail.com",
+            "13991898393@stu.rohail.com",
+            "15065857426@stu.rohail.com",
+            "47675606431@stu.rohail.com",
+            "94789218359@stu.rohail.com",
+            "76409840958@stu.rohail.com",
+            "63921831103@stu.rohail.com",
+            "32042254278@stu.rohail.com",
+            "82117056441@stu.rohail.com",
+            "61113736203@stu.rohail.com",
+            "37507889038@stu.rohail.com",
+            "55295868206@stu.rohail.com",
+            "86006689642@stu.rohail.com",
+            "87303220608@stu.rohail.com",
+            "52137931203@stu.rohail.com",
+            "69997738038@stu.rohail.com",
+            "97056294767@stu.rohail.com",
+            "31233185362@stu.rohail.com",
+            "27849961998@stu.rohail.com",
+            "94994477273@stu.rohail.com",
+            "8589728963@stu.rohail.com",
+            "51354071394@stu.rohail.com",
+            "53488810130@stu.rohail.com",
+            "86146443385@stu.rohail.com",
+            "94145871071@stu.rohail.com",
+            "79284191585@stu.rohail.com",
+            "41349138860@stu.rohail.com",
+            "7391300335@stu.rohail.com"
+        ];
+
+        // List of sample classes
+        const sampleClasses = ["Math", "Science", "History", "Art", "Physics", "Biology", "Literature", "Geography"];
+
+        // Function to randomly select 4 classes
+        function getRandomClasses() {
+            const shuffled = sampleClasses.sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, 4).join(", ");
+        }
+
+        // Populate the table with student data
+        const studentTableBody = document.getElementById('studentTableBody');
+
+        emails.forEach(email => {
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td></td>  <!-- Student Name left blank -->
+                <td>${email}</td> <!-- Email -->
+                <td></td>  <!-- Grade left blank -->
+                <td>${getRandomClasses()}</td> <!-- Random classes -->
+            `;
+            
+            studentTableBody.appendChild(row);
+        });
+    </script>
+</body>
+</html>
