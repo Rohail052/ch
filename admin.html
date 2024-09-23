@@ -18,6 +18,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden; /* Prevent body scrolling */
         }
 
         .container {
@@ -27,6 +28,9 @@
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            height: 90vh; /* Adjust the height of the container */
         }
 
         h1 {
@@ -34,16 +38,29 @@
             margin-bottom: 20px;
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        .search-wrapper {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .table-wrapper {
+            flex: 1;
+            overflow: auto; /* Enable scrolling inside the table container */
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
             font-size: 18px;
             text-align: left;
+            min-width: 800px; /* Set a minimum width to ensure horizontal scrolling */
         }
 
         table th, table td {
@@ -65,7 +82,10 @@
 <body>
     <div class="container">
         <h1>School Admin Dashboard</h1>
-        <div class="table-responsive">
+        <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchStudents()">
+        </div>
+        <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -83,120 +103,125 @@
     </div>
 
     <script>
-        // List of email addresses provided
-        const emails = [
-            "28438635638@stu.rohail.com",
-            "59227717242@stu.rohail.com",
-            "46505998863@stu.rohail.com",
-            "64405296569@stu.rohail.com",
-            "86378727090@stu.rohail.com",
-            "26585942224@stu.rohail.com",
-            "86836494796@stu.rohail.com",
-            "62580145876@stu.rohail.com",
-            "37300497891@stu.rohail.com",
-            "10969619005@stu.rohail.com",
-            "79263522852@stu.rohail.com",
-            "30890854615@stu.rohail.com",
-            "34417550585@stu.rohail.com",
-            "47861151804@stu.rohail.com",
-            "69591755406@stu.rohail.com",
-            "59993543066@stu.rohail.com",
-            "97138175240@stu.rohail.com",
-            "65132383045@stu.rohail.com",
-            "64151792553@stu.rohail.com",
-            "50451476918@stu.rohail.com",
-            "15903943027@stu.rohail.com",
-            "18383631646@stu.rohail.com",
-            "42392129622@stu.rohail.com",
-            "50877747699@stu.rohail.com",
-            "3570776076@stu.rohail.com",
-            "33923616914@stu.rohail.com",
-            "69442325230@stu.rohail.com",
-            "65952431271@stu.rohail.com",
-            "67899980267@stu.rohail.com",
-            "5932269455@stu.rohail.com",
-            "56643714858@stu.rohail.com",
-            "40571573469@stu.rohail.com",
-            "49584287793@stu.rohail.com",
-            "61298213546@stu.rohail.com",
-            "73426426168@stu.rohail.com",
-            "93977367846@stu.rohail.com",
-            "49138237525@stu.rohail.com",
-            "88386381209@stu.rohail.com",
-            "58257978879@stu.rohail.com",
-            "7676025026@stu.rohail.com",
-            "22405182878@stu.rohail.com",
-            "61922403670@stu.rohail.com",
-            "31511657268@stu.rohail.com",
-            "45841455591@stu.rohail.com",
-            "49351860854@stu.rohail.com",
-            "48028831623@stu.rohail.com",
-            "94239615551@stu.rohail.com",
-            "48181634162@stu.rohail.com",
-            "83585252114@stu.rohail.com",
-            "5528740466@stu.rohail.com",
-            "30712783314@stu.rohail.com",
-            "37931866004@stu.rohail.com",
-            "9471439908@stu.rohail.com",
-            "90514777057@stu.rohail.com",
-            "17960379364@stu.rohail.com",
-            "84805640907@stu.rohail.com",
-            "26588142699@stu.rohail.com",
-            "50915138560@stu.rohail.com",
-            "15683686641@stu.rohail.com",
-            "90863596040@stu.rohail.com",
-            "52190186691@stu.rohail.com",
-            "91250683256@stu.rohail.com",
-            "40289329569@stu.rohail.com",
-            "2715008595@stu.rohail.com",
-            "75203877315@stu.rohail.com",
-            "81075664650@stu.rohail.com",
-            "31064104760@stu.rohail.com",
-            "55732588155@stu.rohail.com",
-            "4823896295@stu.rohail.com",
-            "61474656258@stu.rohail.com",
-            "64363116742@stu.rohail.com",
-            "65852117809@stu.rohail.com",
-            "53260793753@stu.rohail.com",
-            "60952992384@stu.rohail.com",
-            "75490930480@stu.rohail.com",
-            "93997464473@stu.rohail.com",
-            "27980754648@stu.rohail.com",
-            "1844433306@stu.rohail.com",
-            "72797755994@stu.rohail.com",
-            "54393059155@stu.rohail.com",
-            "44825382217@stu.rohail.com",
-            "60680451099@stu.rohail.com",
-            "55988347188@stu.rohail.com",
-            "82619569434@stu.rohail.com",
-            "13991898393@stu.rohail.com",
-            "15065857426@stu.rohail.com",
-            "47675606431@stu.rohail.com",
-            "94789218359@stu.rohail.com",
-            "76409840958@stu.rohail.com",
-            "63921831103@stu.rohail.com",
-            "32042254278@stu.rohail.com",
-            "82117056441@stu.rohail.com",
-            "61113736203@stu.rohail.com",
-            "37507889038@stu.rohail.com",
-            "55295868206@stu.rohail.com",
-            "86006689642@stu.rohail.com",
-            "87303220608@stu.rohail.com",
-            "52137931203@stu.rohail.com",
-            "69997738038@stu.rohail.com",
-            "97056294767@stu.rohail.com",
-            "31233185362@stu.rohail.com",
-            "27849961998@stu.rohail.com",
-            "94994477273@stu.rohail.com",
-            "8589728963@stu.rohail.com",
-            "51354071394@stu.rohail.com",
-            "53488810130@stu.rohail.com",
-            "86146443385@stu.rohail.com",
-            "94145871071@stu.rohail.com",
-            "79284191585@stu.rohail.com",
-            "41349138860@stu.rohail.com",
-            "7391300335@stu.rohail.com"
+        const students = [
+            { name: "Ahmed Ali", email: "28438635638@stu.rohail.com" },
+            { name: "Fatima Khan", email: "59227717242@stu.rohail.com" },
+            { name: "Ayesha Malik", email: "46505998863@stu.rohail.com" },
+            { name: "Zainab Hassan", email: "64405296569@stu.rohail.com" },
+            { name: "Hassan Raza", email: "86378727090@stu.rohail.com" },
+            { name: "Omar Siddiqui", email: "26585942224@stu.rohail.com" },
+            { name: "Sara Ahmed", email: "86836494796@stu.rohail.com" },
+            { name: "Bilal Iqbal", email: "62580145876@stu.rohail.com" },
+            { name: "Maryam Noor", email: "37300497891@stu.rohail.com" },
+            { name: "Yasir Khan", email: "10969619005@stu.rohail.com" },
+            { name: "", email: "79263522852@stu.rohail.com" },
+            { name: "", email: "30890854615@stu.rohail.com" },
+            { name: "", email: "34417550585@stu.rohail.com" },
+            { name: "", email: "47861151804@stu.rohail.com" },
+            { name: "", email: "69591755406@stu.rohail.com" },
+            { name: "", email: "59993543066@stu.rohail.com" },
+            { name: "", email: "97138175240@stu.rohail.com" },
+            { name: "", email: "65132383045@stu.rohail.com" },
+            { name: "", email: "64151792553@stu.rohail.com" },
+            { name: "", email: "50451476918@stu.rohail.com" },
+            { name: "", email: "15903943027@stu.rohail.com" },
+            { name: "", email: "18383631646@stu.rohail.com" },
+            { name: "", email: "42392129622@stu.rohail.com" },
+            { name: "", email: "50877747699@stu.rohail.com" },
+            { name: "", email: "3570776076@stu.rohail.com" },
+            { name: "", email: "33923616914@stu.rohail.com" },
+            { name: "", email: "69442325230@stu.rohail.com" },
+            { name: "", email: "65952431271@stu.rohail.com" },
+            { name: "", email: "67899980267@stu.rohail.com" },
+            { name: "", email: "5932269455@stu.rohail.com" },
+            { name: "", email: "56643714858@stu.rohail.com" },
+            { name: "", email: "40571573469@stu.rohail.com" },
+            { name: "", email: "49584287793@stu.rohail.com" },
+            { name: "", email: "61298213546@stu.rohail.com" },
+            { name: "", email: "73426426168@stu.rohail.com" },
+            { name: "", email: "93977367846@stu.rohail.com" },
+            { name: "", email: "49138237525@stu.rohail.com" },
+            { name: "", email: "88386381209@stu.rohail.com" },
+            { name: "", email: "58257978879@stu.rohail.com" },
+            { name: "", email: "7676025026@stu.rohail.com" },
+            { name: "", email: "22405182878@stu.rohail.com" },
+            { name: "", email: "61922403670@stu.rohail.com" },
+            { name: "", email: "31511657268@stu.rohail.com" },
+            { name: "", email: "45841455591@stu.rohail.com" },
+            { name: "", email: "49351860854@stu.rohail.com" },
+            { name: "", email: "48028831623@stu.rohail.com" },
+            { name: "", email: "94239615551@stu.rohail.com" },
+            { name: "", email: "48181634162@stu.rohail.com" },
+            { name: "", email: "83585252114@stu.rohail.com" },
+            { name: "", email: "5528740466@stu.rohail.com" },
+            { name: "", email: "30712783314@stu.rohail.com" },
+            { name: "", email: "37931866004@stu.rohail.com" },
+            { name: "", email: "9471439908@stu.rohail.com" },
+            { name: "", email: "90514777057@stu.rohail.com" },
+            { name: "", email: "17960379364@stu.rohail.com" },
+            { name: "", email: "84805640907@stu.rohail.com" },
+            { name: "", email: "26588142699@stu.rohail.com" },
+            { name: "", email: "50915138560@stu.rohail.com" },
+            { name: "", email: "15683686641@stu.rohail.com" },
+            { name: "", email: "90863596040@stu.rohail.com" },
+            { name: "", email: "52190186691@stu.rohail.com" },
+            { name: "", email: "91250683256@stu.rohail.com" },
+            { name: "", email: "40289329569@stu.rohail.com" },
+            { name: "", email: "2715008595@stu.rohail.com" },
+            { name: "", email: "75203877315@stu.rohail.com" },
+            { name: "", email: "81075664650@stu.rohail.com" },
+            { name: "", email: "31064104760@stu.rohail.com" },
+            { name: "", email: "55732588155@stu.rohail.com" },
+            { name: "", email: "4823896295@stu.rohail.com" },
+            { name: "", email: "61474656258@stu.rohail.com" },
+            { name: "", email: "64363116742@stu.rohail.com" },
+            { name: "", email: "65852117809@stu.rohail.com" },
+            { name: "", email: "53260793753@stu.rohail.com" },
+            { name: "", email: "60952992384@stu.rohail.com" },
+            { name: "", email: "75490930480@stu.rohail.com" },
+            { name: "", email: "93997464473@stu.rohail.com" },
+            { name: "", email: "27980754648@stu.rohail.com" },
+            { name: "", email: "1844433306@stu.rohail.com" },
+            { name: "", email: "72797755994@stu.rohail.com" },
+            { name: "", email: "54393059155@stu.rohail.com" },
+            { name: "", email: "44825382217@stu.rohail.com" },
+            { name: "", email: "60680451099@stu.rohail.com" },
+            { name: "", email: "55988347188@stu.rohail.com" },
+            { name: "", email: "82619569434@stu.rohail.com" },
+            { name: "", email: "13991898393@stu.rohail.com" },
+            { name: "", email: "15065857426@stu.rohail.com" },
+            { name: "", email: "47675606431@stu.rohail.com" },
+            { name: "", email: "94789218359@stu.rohail.com" },
+            { name: "", email: "76409840958@stu.rohail.com" },
+            { name: "", email: "63921831103@stu.rohail.com" },
+            { name: "", email: "32042254278@stu.rohail.com" },
+            { name: "", email: "82117056441@stu.rohail.com" },
+            { name: "", email: "61113736203@stu.rohail.com" },
+            { name: "", email: "37507889038@stu.rohail.com" },
+            { name: "", email: "55295868206@stu.rohail.com" },
+            { name: "", email: "86006689642@stu.rohail.com" },
+            { name: "", email: "87303220608@stu.rohail.com" },
+            { name: "", email: "52137931203@stu.rohail.com" },
+            { name: "", email: "69997738038@stu.rohail.com" },
+            { name: "", email: "97056294767@stu.rohail.com" },
+            { name: "", email: "31233185362@stu.rohail.com" },
+            { name: "", email: "27849961998@stu.rohail.com" },
+            { name: "", email: "94994477273@stu.rohail.com" },
+            { name: "", email: "8589728963@stu.rohail.com" },
+            { name: "", email: "51354071394@stu.rohail.com" },
+            { name: "", email: "53488810130@stu.rohail.com" },
+            { name: "", email: "86146443385@stu.rohail.com" },
+            { name: "", email: "94145871071@stu.rohail.com" },
+            { name: "", email: "79284191585@stu.rohail.com" },
+            { name: "", email: "41349138860@stu.rohail.com" },
+            { name: "", email: "7391300335@stu.rohail.com" }
         ];
+
+        // Function to generate random grades
+        function getRandomGrade() {
+            const grades = ['A', 'B', 'C', 'D', 'F'];
+            return grades[Math.floor(Math.random() * grades.length)];
+        }
 
         // List of sample classes
         const sampleClasses = ["Math", "Science", "History", "Art", "Physics", "Biology", "Literature", "Geography"];
@@ -210,18 +235,30 @@
         // Populate the table with student data
         const studentTableBody = document.getElementById('studentTableBody');
 
-        emails.forEach(email => {
+        students.forEach(student => {
             const row = document.createElement('tr');
-            
             row.innerHTML = `
-                <td></td>  <!-- Student Name left blank -->
-                <td>${email}</td> <!-- Email -->
-                <td></td>  <!-- Grade left blank -->
+                <td>${student.name}</td> <!-- Student Name -->
+                <td>${student.email}</td> <!-- Email -->
+                <td>${getRandomGrade()}</td>  <!-- Random Grade -->
                 <td>${getRandomClasses()}</td> <!-- Random classes -->
             `;
-            
             studentTableBody.appendChild(row);
         });
+
+        // Search function to filter students by name
+        function searchStudents() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const rows = studentTableBody.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const nameCell = rows[i].getElementsByTagName('td')[0]; // Name column
+                if (nameCell) {
+                    const name = nameCell.textContent.toLowerCase();
+                    rows[i].style.display = name.includes(input) ? '' : 'none';
+                }
+            }
+        }
     </script>
 </body>
 </html>
