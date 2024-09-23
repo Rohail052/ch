@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Admin Page</title>
+    <title>School Admin Dashboard</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,13 +13,13 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden; /* Prevent body scrolling */
+            overflow: hidden;
         }
 
         .container {
@@ -26,16 +27,18 @@
             max-width: 1200px;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            height: 90vh; /* Adjust the height of the container */
+            height: 90vh;
         }
 
         h1 {
             text-align: center;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            color: #333;
         }
 
         .search-wrapper {
@@ -44,15 +47,23 @@
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 16px;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #5c9ded;
+            background-color: #fff;
         }
 
         .table-wrapper {
             flex: 1;
-            overflow: auto; /* Enable scrolling inside the table container */
+            overflow: auto;
         }
 
         table {
@@ -60,48 +71,146 @@
             border-collapse: collapse;
             font-size: 18px;
             text-align: left;
-            min-width: 800px; /* Set a minimum width to ensure horizontal scrolling */
+            min-width: 800px;
         }
 
-        table th, table td {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
+        table th,
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
         }
 
         table th {
             background-color: #f8f8f8;
+            font-weight: 600;
+            color: #333;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f7ff;
         }
 
         @media (max-width: 768px) {
-            table, table th, table td {
+            table,
+            table th,
+            table td {
                 font-size: 16px;
             }
         }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        #main {
+            transition: margin-left 0.3s;
+            padding: 16px;
+        }
+
+        .floating-openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .floating-openbtn:hover {
+            background-color: #575757;
+        }
+
+        /* Scroll bar styling for table */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>School Admin Dashboard</h1>
-        <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchStudents()">
-        </div>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Email</th>
-                        <th>Grade</th>
-                        <th>Classes</th>
-                    </tr>
-                </thead>
-                <tbody id="studentTableBody">
-                    <!-- Student rows will be populated here via JavaScript -->
-                </tbody>
-            </table>
+    <!-- Sidebar Navigation -->
+    <div id="mySidebar" class="sidebar">
+        <button class="closebtn" onclick="closeNav()">×</button>
+        <a href="email.html">Email</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="syllabus.html">Syllabus</a>
+        <a href="exam.html">Exam</a>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main">
+        <div class="container">
+            <h1>School Admin Dashboard</h1>
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Search by name..." onkeyup="searchStudents()">
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Grade</th>
+                            <th>Classes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Student rows will be populated here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- Floating Button to Open Sidebar -->
+    <button class="floating-openbtn" onclick="openNav()">☰</button>
+
+    <!-- JavaScript functionality -->
     <script>
         const students = [
             { name: "Ahmed Ali", email: "28438635638@stu.rohail.com" },
@@ -114,7 +223,7 @@
             { name: "Bilal Iqbal", email: "62580145876@stu.rohail.com" },
             { name: "Maryam Noor", email: "37300497891@stu.rohail.com" },
             { name: "Yasir Khan", email: "10969619005@stu.rohail.com" },
-            { name: "", email: "79263522852@stu.rohail.com" },
+             { name: "", email: "79263522852@stu.rohail.com" },
             { name: "", email: "30890854615@stu.rohail.com" },
             { name: "", email: "34417550585@stu.rohail.com" },
             { name: "", email: "47861151804@stu.rohail.com" },
@@ -217,7 +326,7 @@
             { name: "", email: "7391300335@stu.rohail.com" }
         ];
 
-        // Function to generate random grades
+        // Generate random grades
         function getRandomGrade() {
             const grades = ['A', 'B', 'C', 'D', 'F'];
             return grades[Math.floor(Math.random() * grades.length)];
@@ -238,10 +347,10 @@
         students.forEach(student => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${student.name}</td> <!-- Student Name -->
-                <td>${student.email}</td> <!-- Email -->
-                <td>${getRandomGrade()}</td>  <!-- Random Grade -->
-                <td>${getRandomClasses()}</td> <!-- Random classes -->
+                <td>${student.name}</td>
+                <td>${student.email}</td>
+                <td>${getRandomGrade()}</td>
+                <td>${getRandomClasses()}</td>
             `;
             studentTableBody.appendChild(row);
         });
@@ -252,13 +361,23 @@
             const rows = studentTableBody.getElementsByTagName('tr');
 
             for (let i = 0; i < rows.length; i++) {
-                const nameCell = rows[i].getElementsByTagName('td')[0]; // Name column
+                const nameCell = rows[i].getElementsByTagName('td')[0];
                 if (nameCell) {
                     const name = nameCell.textContent.toLowerCase();
                     rows[i].style.display = name.includes(input) ? '' : 'none';
                 }
             }
         }
+
+        // Sidebar open/close functions
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
     </script>
 </body>
+
 </html>
