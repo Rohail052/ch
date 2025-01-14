@@ -170,65 +170,47 @@
             <h3>Visualization</h3>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 mt-4">
-          <!-- Row  -->
-              <div class="row no-gutters">
-                <div class="container">
-                  <div class="col-lg-6 contact-box mb-4 mb-md-0">
-                    <div class="">
-                      <h1 class="title font-weight-light text-white mt-2">Contact Us / Feedback</h1>
-                      <form class="mt-3" action="https://formspree.io/f/mdkngeza"
-                        method="POST">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="form-group mt-2">
-                              <input class="form-control text-white" type="text"
-                                placeholder="name" name="name" minlength="3" required>
-                            </div>
-                          </div>
-                          <div class="col-lg-12">
-                            <div class="form-group mt-2">
-                              <input class="form-control text-white" type="email"
-                                placeholder="email address" name="sender"
-                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                                required>
-                            </div>
-                          </div>
-                          <div class="col-lg-12">
-                            <div class="form-group mt-2">
-                              <textarea class="form-control text-white" rows="3"
-                                placeholder="message" name="message" minlength="20"
-                                required></textarea>
-                            </div>
-                          </div>
-                          <div class="col-lg-12 d-flex align-items-center mt-2">
-                            <button  type="submit"
-                              class="btn bg-white text-inverse px-3 py-2"><span>
-                                Submit</span></button>
-                            <span class="ml-auto text-white align-self-center"><i
-                                class="fas fa-phone-alt mr-2"></i><a class="contact-link"
-                                href="tel:+1336123456">336-123-4566
-                                </a></span>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-               
-
-
-        </div>
-      </div>
-    </div><!-- End Interests -->
+         </div>
+         </div>
+                     <!-- Read the Formbutton docs at formspree.io/formbutton/docs. See more examples at codepen.io/formspree -->
+<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+<script>
+  /* paste this line in verbatim */
+  window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+  /* customize formbutton below*/     
+  formbutton("create", {
+    action: "https://formspree.io/f/mdkngeza",
+    title: "How can we help?",
+    fields: [
+      { 
+        type: "email", 
+        label: "Email:", 
+        name: "email",
+        required: true,
+        placeholder: "your@email.com"
+      },
+      {
+        type: "textarea",
+        label: "Message:",
+        name: "message",
+        placeholder: "How can we help?",
+      },
+      { type: "submit" }      
+    ],
+    styles: {
+      title: {
+        backgroundColor: "gray"
+      },
+      button: {
+        backgroundColor: "gray"
+      }
+    }
+  });
+</script>
   </section><!-- End About Section -->
 
-  <!-- Start Project Section -->
+
+     <!-- Start Project Section -->
   <section id="portfolio" class="portfolio">
     <div class="container">
 
@@ -385,7 +367,6 @@
   <!-- End Project Section -->
 
 
-
   <!-- Start Skills Section -->
 
   <section id="skills" class="services">
@@ -453,8 +434,8 @@
           <p class="description" style="color:#fff;">The link contains downloadable resume</p>
         </div>
         <div class="col-md-3 mt-4 mt-md-0 icon-box" data-aos="fade-up">
-          <a href="https://github.com/rajaprerak/LeetCode_Problems" target="_blank"><div class="icon"><i class="icofont-link"></i></div></a>
-          <h4 class="title"><a href="https://github.com/rajaprerak/LeetCode_Problems" target="_blank">LeetCode Repository</a></h4>
+          <a href="https://github.com/" target="_blank"><div class="icon"><i class="icofont-link"></i></div></a>
+          <h4 class="title"><a href="https://github.com/" target="_blank">LeetCode Repository</a></h4>
           <p class="description" style="color:#fff;"> The github repository contains leetcode problems solution in python.</p>
         </div>
         <!-- <div class="col-md-3 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
