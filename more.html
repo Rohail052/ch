@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and More
-    </title>
+    <title>Login and More</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -15,6 +14,7 @@
             height: 100vh;
             background-color: #f0f0f0;
             margin: 0;
+            position: relative;
         }
 
         h1 {
@@ -50,6 +50,27 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
+        /* Top-right corner button */
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        .top-btn {
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+            border-radius: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .top-btn:hover {
+            background-color: #666;
+        }
+
         /* Button Styles */
         .btn-1 {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -83,7 +104,6 @@
             background: linear-gradient(135deg, #38ef7d, #11998e);
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .beautiful-btn {
                 font-size: 1em;
@@ -113,10 +133,20 @@
                 flex-direction: column;
                 gap: 10px;
             }
+
+            .top-btn {
+                font-size: 0.8em;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- Top-right Home button -->
+    <div class="top-right">
+        <a href="index.html" class="top-btn">Home</a>
+    </div>
 
     <h1>Login and More</h1>
 
